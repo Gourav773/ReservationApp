@@ -1,0 +1,234 @@
+/* ================= HEADER ================= */
+.header {
+  background: linear-gradient(135deg, #003580, #0056b3);
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+/* CONTAINER */
+.headerContainer {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+/* LIST MODE */
+.headerContainer.listMode {
+  margin-bottom: 0;
+}
+
+/* ================= MENU ================= */
+.headerList {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.headerListItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.headerListItem:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.headerListItem.active {
+  border: 2px solid white;
+}
+
+/* ================= TEXT ================= */
+.headerTitle {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.headerDesc {
+  margin: 10px 0 20px;
+  font-size: 15px;
+}
+
+/* ================= BUTTON ================= */
+.headerBtn {
+  background-color: #0071c2;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.headerBtn:hover {
+  background-color: #005999;
+}
+
+/* ================= SEARCH BAR ================= */
+.headerSearch {
+  background: white;
+  border: 3px solid #febb02;
+  border-radius: 10px;
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  margin-top: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+  overflow: visible; /* 🔥 important */
+}
+
+/* SEARCH ITEM */
+.headerSearchItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 6px;
+
+  flex: 1;
+  min-width: 200px;
+
+  position: relative; /* 🔥 FIX for dropdown */
+}
+
+/* INPUT */
+.headerSearchInput {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+}
+
+/* ICON */
+.headerIcon {
+  color: #555;
+}
+
+/* TEXT */
+.headerSearchText {
+  color: #555;
+  cursor: pointer;
+}
+
+/* ================= DATE PICKER ================= */
+.date {
+  position: absolute;
+  top: 60px;
+  left: 0;
+
+  z-index: 1000;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* ================= OPTIONS ================= */
+.options {
+  position: absolute;
+  top: 60px;
+  left: 0;
+
+  background: white;
+  color: #333;
+  border-radius: 10px;
+  padding: 10px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* OPTION ITEMS */
+.optionItem {
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+/* COUNTER */
+.optionCounter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.optionCounterButton {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #0071c2;
+  background: white;
+  color: #0071c2;
+  cursor: pointer;
+}
+
+.optionCounterButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ================= ANIMATION ================= */
+.date,
+.options {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .headerTitle {
+    font-size: 24px;
+  }
+
+  .headerSearch {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .headerSearchItem {
+    width: 100%;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .headerList {
+    gap: 10px;
+  }
+
+  .headerTitle {
+    font-size: 20px;
+  }
+
+  .headerDesc {
+    font-size: 13px;
+  }
+
+  .headerBtn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,99 @@
+/* .footer{
+    width: 100%;
+    width: 1024px;
+    font-size: 15px;
+  }
+  
+  .fLists{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  
+  .fList{
+    list-style: none;
+    padding: 0;
+  }
+  
+  .fListItem{
+    margin-bottom: 10px;
+    color: #003580;
+    cursor: pointer;
+  } */
+
+
+  .footer {
+  width: 100%;
+  background-color: #f8f9fa;
+  /* padding: 40px 20px; */
+}
+
+/* CENTER CONTENT */
+.footerContainer {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* GRID LAYOUT */
+.fLists {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+/* TITLE */
+.fTitle {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+/* LIST */
+.fList {
+  list-style: none;
+  padding: 0;
+}
+
+.fList li {
+  margin-bottom: 8px;
+  color: #003580;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.fList li:hover {
+  color: #0071c2;
+  transform: translateX(5px);
+}
+
+/* BOTTOM TEXT */
+.fText {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+
+/* 📱 TABLET */
+@media (max-width: 992px) {
+  .fLists {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 📱 MOBILE */
+@media (max-width: 600px) {
+  .fLists {
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+  }
+
+  .fList li:hover {
+    transform: none;
+  }
+}

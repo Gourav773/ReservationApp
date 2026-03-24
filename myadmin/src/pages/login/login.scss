@@ -1,0 +1,118 @@
+
+    // .login {
+    //     height: 100vh;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    //   }
+      
+    //   .lContainer {
+    //     display: flex;
+    //     flex-direction: column;
+    //     gap: 10px;
+    //   }
+      
+    //   .lInput{
+    //     height: 30px;
+    //     padding: 10px;
+    //   }
+      
+    //   .lButton {
+    //     border: none;
+    //     padding: 10px 20px;
+    //     background-color: #0071c2;
+    //     color: white;
+    //     font-weight: bold;
+    //     cursor: pointer;
+    //     border-radius: 5px;
+    //   }
+      
+    //   .lButton:disabled{
+    //     background-color: #0071c28c;
+    //     cursor: not-allowed;
+    //   }
+    //   .error{
+    //     color: red;
+    //     font-size: small;
+    //   }
+
+
+    .loginPage {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #003580, #0071c2);
+}
+
+.loginBox {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.loginBox h2 {
+  text-align: center;
+  color: #003580;
+}
+
+.loginBox p {
+  text-align: center;
+  color: gray;
+}
+
+.loginBox input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.loginBox input:focus {
+  border-color: #0071c2;
+}
+
+.loginBox button {
+  padding: 12px;
+  border: none;
+  background: #0071c2;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.loginBox button:hover {
+  background: #005fa3;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.switch {
+  text-align: center;
+  font-size: 14px;
+}
+
+.switch span {
+  color: #0071c2;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* 📱 Mobile */
+@media (max-width: 500px) {
+  .loginBox {
+    padding: 20px;
+    margin: 0 15px;
+  }
+}
