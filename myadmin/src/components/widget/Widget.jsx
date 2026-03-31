@@ -4,6 +4,8 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import PropTypes from "prop-types";
+
 
 const Widget = ({ type }) => {
   let data;
@@ -99,3 +101,7 @@ const Widget = ({ type }) => {
 };
 
 export default Widget;
+
+Widget.propTypes = {
+  type: PropTypes.string.isRequired,
+};

@@ -2,7 +2,7 @@ import React from 'react'
 import "../components/featuredproperties.css"
 import useFetch from '../hooks/useFetch';
 const FeaturedProperties = () => {
-    const { data, loading, error } = useFetch("http://localhost:8000/api/hotels?featured=true");
+    const { data, loading, error } = useFetch("http://localhost:8000/auth/hotels?featured=true");
 
     return (
         <div className="fp">

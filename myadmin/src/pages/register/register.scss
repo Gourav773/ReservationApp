@@ -1,44 +1,5 @@
-
-    // .login {
-    //     height: 100vh;
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //   }
-      
-    //   .lContainer {
-    //     display: flex;
-    //     flex-direction: column;
-    //     gap: 10px;
-    //   }
-      
-    //   .lInput{
-    //     height: 30px;
-    //     padding: 10px;
-    //   }
-      
-    //   .lButton {
-    //     border: none;
-    //     padding: 10px 20px;
-    //     background-color: #0071c2;
-    //     color: white;
-    //     font-weight: bold;
-    //     cursor: pointer;
-    //     border-radius: 5px;
-    //   }
-      
-    //   .lButton:disabled{
-    //     background-color: #0071c28c;
-    //     cursor: not-allowed;
-    //   }
-    //   .error{
-    //     color: red;
-    //     font-size: small;
-    //   }
-
-
-    .loginPage {
-  height: 100vh;
+.loginPage {
+  height: 97vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -54,9 +15,10 @@
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
+
 
 .loginBox h2 {
   text-align: center;
@@ -96,6 +58,7 @@
 .error {
   color: red;
   text-align: center;
+  font-size: 14px;
 }
 
 .switch {

@@ -38,85 +38,80 @@ export const userInputs = [
     
   ];
   
-  export const hotelInputs = [
-    {
-      id: "type",
-      label: "Type",
-      type: "text",
-      placeholder: "Type",
-    },
-    {
-      id: "name",
-      label: "Name",
-      type: "text",
-      placeholder: "My name",
-    },
-    {
-      id: "desc",
-      label: "Description",
-      type: "text",
-      placeholder: "Description",
-    },
-    {
-      id: "city",
-      label: "City",
-      type: "text",
-      placeholder: "City",
-    },
-    {
-      id:"cheapestprice",
-      label: "Price",
-      type: "text",
-      placeholder: "100",
-    },
-    {
-      id: "address",
-      label: "Adress",
-      type: "text",
-      placeholder: "address",
-    },
-    {
-      id: "distance",
-      label: "Distance",
-      type: "text",
-      placeholder: "Distance",
-    },
-    {
-      id: "title",
-      label: "title",
-      type: "text",
-      placeholder: "Title",
-    },
-  ];
+export const hotelInputs = [
+  {
+    id: "type",
+    label: "Type",
+    type: "text",
+    placeholder: "Hotel / Apartment / Villa",
+  },
+  {
+    id: "name",
+    label: "Name",
+    type: "text",
+    placeholder: "Hotel Name",
+  },
+  {
+    id: "desc",
+    label: "Description",
+    type: "text",
+    placeholder: "Hotel Description",
+  },
+  {
+    id: "city",
+    label: "City",
+    type: "text",
+    placeholder: "Mumbai",
+  },
+  {
+    id: "cheapestprice",
+    label: "Price",
+    type: "number", // ✅ FIX
+    placeholder: "100",
+  },
+  {
+    id: "address",
+    label: "Address", // ✅ FIX
+    type: "text",
+    placeholder: "Full Address",
+  },
+  {
+    id: "distance",
+    label: "Distance",
+    type: "text",
+    placeholder: "2km from center",
+  },
+  {
+    id: "title",
+    label: "Title",
+    type: "text",
+    placeholder: "Best Hotel",
+  },
+];
   
-
   export const roomInputs = [
-    
-    {
-      id: "title",
-      label: "Title",
-      type: "text",
-      placeholder: "Enter Room Title here",
-    },
-    {
-      id: "desc",
-      label: "Description",
-      type: "text",
-      placeholder: "Description",
-    },
-    
-    {
-      id:"price",
-      label: "Price",
-      type: "text",
-      placeholder: "100",
-    },
-    {
-      id: "maxPeople",
-      label: "maxPeople",
-      type: "text",
-      placeholder: "address",
-    },
-    
-  ];
-  
+  {
+    id: "title",
+    label: "Title",
+    type: "text",
+    placeholder: "Enter Room Title",
+  },
+  {
+    id: "desc",
+    label: "Description",
+    type: "text",
+    placeholder: "Room description",
+  },
+  {
+    id: "price",
+    label: "Price",
+    type: "number", // ✅ FIXED
+    placeholder: "100",
+  },
+  {
+    id: "maxPeople",
+    label: "Max People",
+    type: "number", // ✅ FIXED
+    placeholder: "2",
+  },
+];

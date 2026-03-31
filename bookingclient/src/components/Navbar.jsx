@@ -113,17 +113,97 @@
 // export default Navbar;
 
 
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import "../components/navbar.css";
+// import { Link } from "react-router-dom";
+// import { useState } from "react";
+// import "../components/navbar.css";
 
-const Navbar = ({ user, handleLogout, handleLogin, handleRegister, handleReserved }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+// const Navbar = ({ user, handleLogout, handleLogin, handleRegister, handleReserved }) => {
+//   const [menuOpen, setMenuOpen] = useState(false);
+
+//   return (
+//     <div className="navbar">
+//       <div className="navContainer">
+
+//         {/* Logo */}
+//         <Link to="/" className="logoLink">
+//           <span className="logo">BookMe.in</span>
+//         </Link>
+
+//         {/* Mobile Menu Toggle */}
+//         <div className="menuToggle" onClick={() => setMenuOpen(!menuOpen)}>
+//           ☰
+//         </div>
+
+//         {/* Right Side */}
+//         <div className={`navItems ${menuOpen ? "active" : ""}`}>
+//           {user ? (
+//             <>
+//               <button className="navButton" onClick={handleReserved}>
+//                 Reserved
+//               </button>
+
+//               <span className="username">{user.username}</span>
+
+//               <button className="navButton logout" onClick={handleLogout}>
+//                 Logout
+//               </button>
+//             </>
+//           ) : (
+//             <>
+//               <button className="navButton" onClick={handleRegister}>
+//                 Register
+//               </button>
+
+//               <button className="navButton" onClick={handleLogin}>
+//                 Login
+//               </button>
+//             </>
+//           )}
+//         </div>
+
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Navbar;
+
+
+
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import "../components/navbar.css";
+import { AuthContext } from "../context/AuthContext";
+
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false); // Mobile menu toggle
+  const navigate = useNavigate();
+  const { user, dispatch } = useContext(AuthContext); // Get user from context
+
+  // Navigate to register page
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
+  // Navigate to login page
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  // Navigate to reserved page
+  const handleReserved = () => {
+    navigate("/reserved");
+  };
+
+  // Logout function
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+  };
 
   return (
     <div className="navbar">
       <div className="navContainer">
-
         {/* Logo */}
         <Link to="/" className="logoLink">
           <span className="logo">BookMe.in</span>
@@ -134,7 +214,7 @@ const Navbar = ({ user, handleLogout, handleLogin, handleRegister, handleReserve
           ☰
         </div>
 
-        {/* Right Side */}
+        {/* Right Side Navigation Items */}
         <div className={`navItems ${menuOpen ? "active" : ""}`}>
           {user ? (
             <>
@@ -160,7 +240,6 @@ const Navbar = ({ user, handleLogout, handleLogin, handleRegister, handleReserve
             </>
           )}
         </div>
-
       </div>
     </div>
   );

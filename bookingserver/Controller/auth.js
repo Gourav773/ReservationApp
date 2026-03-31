@@ -86,13 +86,24 @@ const auth = {
       process.env.JWT_SECRET
     );
 
-   res.cookie("access_token", token, {
+res.cookie("access_token", token, {
   httpOnly: true,
-  sameSite: "lax",   // important
+  sameSite: "lax",   // ✅ ab safe
 })
       .status(200)
       .json(user);
 
+  } catch (err) {
+    next(err);
+  }
+},
+
+async logout(req, res, next) {
+  try {
+    res.clearCookie("access_token", {
+      httpOnly: true,
+      sameSite: "lax",
+    }).status(200).json("Logged out successfully");
   } catch (err) {
     next(err);
   }
@@ -109,15 +120,18 @@ const auth = {
       }
    },
    
-   async getUsers(req,res , next){
-      try {
-         const user = await User.find();
-         res.status(200).json(user);
-         
-      } catch (err) {
-          return next(err)
-      }
-   },
+async getUsers(req,res , next){
+   try {
+      const users = await User.find({ isAdmin: false })  // ✅ FIX
+                              .select("-password");      // 🔐 password hide
+
+      res.status(200).json(users);
+      
+   } catch (err) {
+       return next(err)
+   }
+},
+
    async UpdateUser(req, res , next){
       try {
          const UpdatedUser = await User.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});

@@ -13,93 +13,32 @@ import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newhotel/NewHotel";
 import NewRooms from "./pages/newRooms/NewRooms";
 import Register from "./pages/register/Register";
-
-// function App() {
-//   const { darkMode } = useContext(DarkModeContext);
-  
-//   const ProtectedRoute = ({children})=>{
-//     const {user} = useContext(AuthContext);
-//     if(!user){
-//       return <Navigate to="/login"/>
-//     }else{
-//       return children;
-//     }
-//   }
-//   return (
-//     <div className={darkMode ? "app dark" : "app"}>
-//       <BrowserRouter>
-//         <Routes>
-//           <Route path="/">
-//           <Route path="register" element={<Register />} />
-// <Route
-//   path="login"
-//   element={user ? <Navigate to="/" /> : <Login />}
-// />
-//             <Route index element={<ProtectedRoute><Home /></ProtectedRoute>} />
-           
-//             <Route path="users">
-//               <Route index element={<ProtectedRoute><List columns={userColumns}/></ProtectedRoute>} />
-//               <Route path=":userId" element={<ProtectedRoute><Single /></ProtectedRoute>} />
-//               <Route
-//                 path="new"
-//                 element={<New inputs={userInputs} title="Add New User" />}
-//               />
-//             </Route>
-//             <Route path="/hotels">
-//               <Route index element={<ProtectedRoute><List columns={hotelColumns}/></ProtectedRoute>} />
-//               <Route path=":productId" element={<ProtectedRoute><Single /></ProtectedRoute>} />
-//               <Route
-//                 path="new"
-//                 element={<NewHotel   />}
-//               />
-//             </Route>
-//             <Route path="/rooms">
-//               <Route index element={<ProtectedRoute><List columns={roomColumns}/></ProtectedRoute>} />
-//               <Route path=":productId" element={<ProtectedRoute><Single /></ProtectedRoute>} />
-//               <Route
-//                 path="new"
-//                 element={<NewRooms   />}
-//               />
-//             </Route>
-//           </Route>
-//         </Routes>
-//       </BrowserRouter>
-//     </div>
-//   );
-// }
-
-// export default App;
+import Hotel from "./pages/hotel/Hotel";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-
-  // ✅ ADD THIS
   const { user } = useContext(AuthContext);
 
   const ProtectedRoute = ({ children }) => {
-    if (!user) {
-      return <Navigate to="/login" />;
-    } else {
-      return children;
-    }
+    return user ? children : <Navigate to="/login" />;
   };
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
+
+          {/* AUTH ROUTES */}
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/" /> : <Login />}
+          />
+
+          {/* PROTECTED ROUTES */}
           <Route path="/">
-
-            {/* ✅ REGISTER */}
-            <Route path="register" element={<Register />} />
-
-            {/* ✅ LOGIN FIX */}
-            <Route
-              path="login"
-              element={user ? <Navigate to="/" /> : <Login />}
-            />
-
-            {/* ✅ HOME */}
+            
+            {/* HOME */}
             <Route
               index
               element={
@@ -120,7 +59,7 @@ function App() {
                 }
               />
               <Route
-                path=":userId"
+                path=":id"
                 element={
                   <ProtectedRoute>
                     <Single />
@@ -129,7 +68,11 @@ function App() {
               />
               <Route
                 path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
+                element={
+                  <ProtectedRoute>
+                    <New inputs={userInputs} title="Add New User" />
+                  </ProtectedRoute>
+                }
               />
             </Route>
 
@@ -143,15 +86,25 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
+              {/* ✅ HOTEL DETAIL (CORRECT PLACE) */}
               <Route
-                path=":productId"
+                path=":id"
                 element={
                   <ProtectedRoute>
-                    <Single />
+                    <Hotel />
                   </ProtectedRoute>
                 }
               />
-              <Route path="new" element={<NewHotel />} />
+
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewHotel />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
 
             {/* ROOMS */}
@@ -165,14 +118,21 @@ function App() {
                 }
               />
               <Route
-                path=":productId"
+                path=":id"
                 element={
                   <ProtectedRoute>
                     <Single />
                   </ProtectedRoute>
                 }
               />
-              <Route path="new" element={<NewRooms />} />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewRooms />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
 
           </Route>
@@ -181,4 +141,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

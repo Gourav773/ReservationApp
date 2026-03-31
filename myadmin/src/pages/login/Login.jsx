@@ -98,10 +98,10 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/auth/login",
-        credentials,
-        { withCredentials: true }
-      );
+  "http://localhost:8000/auth/login",
+  credentials,
+  { withCredentials: true } // 🔥 MUST
+);
 
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });

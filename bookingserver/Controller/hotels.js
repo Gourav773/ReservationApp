@@ -1,31 +1,23 @@
 const Hotel = require('../Model/Hotel')
 const hotels = {
 
-    async getHotel(req, res, next) {
-        try {
-            const hotel = await Hotel.findById(req.params.id);
-            res.status(200).json(hotel)
-        } catch (err) {
-            next(err)
-        }
-    },
+ async getHotels(req, res, next) {
+  try {
+    const hotels = await Hotel.find().populate("rooms");
+    res.status(200).json(hotels);
+  } catch (err) {
+    next(err);
+  }
+},
 
-
-    async getHotels(req, res, next) {
-        const { min, max, ...others } = req.query;
-        
-        try {
-          const hotels = await Hotel.find({
-            ...others,
-            cheapestprice: { $gt: min | 1, $lt: max || 999 },
-          }).limit(req.query.limit);
-         // console.log(hotels)
-          res.status(200).json(hotels);
-
-        } catch (err) {
-          next(err);
-        }
-    },
+async getHotel(req, res, next) {
+  try {
+    const hotel = await Hotel.findById(req.params.id).populate("rooms");
+    res.status(200).json(hotel);
+  } catch (err) {
+    next(err);
+  }
+},
 
 
     async getHotelByCity(req, res, next) {
@@ -65,15 +57,19 @@ const hotels = {
 
 
 
-    async addhotel(req, res) {
-        const newHotel = new Hotel(req.body);
-        try {
-            const savedHotel = await newHotel.save();
-            res.status(200).json(savedHotel);
-        } catch (err) {
-            res.status(400).json(err)
-        }
-    },
+ async addhotel(req, res) {
+  console.log("REQ BODY:", req.body); // 🔥 ADD THIS
+
+  const newHotel = new Hotel(req.body);
+  try {
+    const savedHotel = await newHotel.save();
+    console.log("SAVED:", savedHotel); // 🔥 ADD THIS
+    res.status(200).json(savedHotel);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+},
 
 
 

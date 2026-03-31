@@ -1,18 +1,24 @@
-import "./list.scss"
-import Sidebar from "../../components/sidebar/Sidebar"
-import Navbar from "../../components/navbar/Navbar"
-import Datatable from "../../components/datatable/Datatable"
+import "./list.scss";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
+import Datatable from "../../components/datatable/Datatable";
+import PropTypes from "prop-types";
 
-const List = ({columns}) => {
+const List = ({ columns }) => {
   return (
     <div className="list">
-      <Sidebar/>
+      <Sidebar />
       <div className="listContainer">
-        <Navbar/>
-        <Datatable columns={columns}/>
+        <Navbar />
+        <Datatable columns={columns} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default List
+// ✅ PropTypes fix
+List.propTypes = {
+  columns: PropTypes.array.isRequired,
+};
+
+export default List;

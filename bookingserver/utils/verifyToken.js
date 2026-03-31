@@ -48,6 +48,7 @@ const createError = require('./error');
 function verifyToken(req, res, next) {
   const token = req.cookies.access_token;
 
+
   if (!token) {
     return next(createError(401, "You are not authenticated"));
   }
@@ -74,6 +75,12 @@ function verifyUser(req, res, next) {
 
 function verifyAdmin(req, res, next) {
   verifyToken(req, res, () => {
+    console.log("USER:", req.user); // 🔍 debug
+
+    if (!req.user) {
+      return next(createError(401, "User not found in token"));
+    }
+
     if (req.user.isAdmin) {
       next();
     } else {

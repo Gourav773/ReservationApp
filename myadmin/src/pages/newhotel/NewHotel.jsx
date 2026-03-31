@@ -7,42 +7,74 @@ import axios from 'axios'
 import { hotelInputs } from "../../formSource";
 import useFetch from '../../hooks/useFetch'
 
-const NewHotel = ({ }) => {
-  const [files, setFiles] = useState("");
+const NewHotel = () => {
+  const [files, setFiles] = useState([]);
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
-  const { data, loading, error } = useFetch("http://localhost:8000/api/rooms")
+  const { data, loading } = useFetch("http://localhost:8000/api/rooms");
 
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }))
+const handleChange = (e) => {
+  let value = e.target.value;
+
+  // 🔥 boolean fix
+  if (e.target.id === "featured") {
+    value = value === "true";
   }
+
+  // 🔥 number fix
+  if (e.target.type === "number") {
+    value = Number(value);
+  }
+
+  setInfo((prev) => ({
+    ...prev,
+    [e.target.id]: value,
+  }));
+};
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      const list = await Promise.all(Object.values(files).map(async (file) => {
-        const data = new FormData()
-        data.append('file', file);
-        data.append('upload_preset', "upload")
+  e.preventDefault();
 
-        const uploadRes = await axios.post('https://api.cloudinary.com/v1_1/ankitmewada/image/upload', data)
+  try {
+    let list = [];
 
-        const { url } = uploadRes.data
-        return url
-      }))
+    if (files.length > 0) {
+      list = await Promise.all(
+        files.map(async (file) => {
+          const data = new FormData();
+          data.append("file", file);
+          data.append("upload_preset", "upload");
 
-      const newhotel = {
-        ...info,
-        rooms,
-        photos: list
-      }
-      console.log(newhotel)
-      await axios.post("http://localhost:8000/api/addhotel", newhotel)
+          const uploadRes = await axios.post(
+            "https://api.cloudinary.com/v1_1/ankitmewada/image/upload",
+            data
+          );
 
-    } catch (err) {
-         console.log(err)
+          return uploadRes.data.url;
+        })
+      );
     }
+
+    const newhotel = {
+      ...info,
+      rooms,
+      photos: list.length > 0 ? list : [],
+    };
+
+    console.log(newhotel);
+
+    await axios.post(
+      "http://localhost:8000/auth/addhotels",
+      newhotel
+    );
+
+    alert("Hotel Added Successfully ✅");
+
+  } catch (err) {
+    console.log(err.response?.data || err.message);
   }
+};
+
   const handleSelect = (e) => {
     const value = Array.from(e.target.selectedOptions, (option) => option.value)
     setRooms(value)
@@ -61,9 +93,9 @@ const NewHotel = ({ }) => {
           <div className="left">
             <img
               src={
-                files
-                  ? URL.createObjectURL(files[0])
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                files.length > 0
+  ? URL.createObjectURL(files[0])
+  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               alt=""
             />
@@ -74,13 +106,13 @@ const NewHotel = ({ }) => {
                 <label htmlFor="file">
                   Image: <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
-                <input
-                  type="file"
-                  id="file"
-                  multiple
-                  onChange={(e) => setFiles(e.target.files)}
-                  style={{ display: "none" }}
-                />
+               <input
+  type="file"
+  id="file"
+  multiple
+  onChange={(e) => setFiles(Array.from(e.target.files))}
+  style={{ display: "none" }}
+/>
               </div>
 
               {hotelInputs.map((input) => (
@@ -89,13 +121,13 @@ const NewHotel = ({ }) => {
                   <input onChange={handleChange} type={input.type} placeholder={input.placeholder} id={input.id} />
                 </div>
               ))}
-              <div className="formInput">
-                <label>Featured</label>
-                <select id="featured" onChange={handleChange}>
-                  <option value={false}>No</option>
-                  <option value={true}>Yes</option>
-                </select>
-              </div>
+             <div className="formInput">
+  <label>Featured</label>
+  <select id="featured" onChange={handleChange}>
+    <option value="false">No</option>
+    <option value="true">Yes</option>
+  </select>
+</div>
               <div className="formInput">
                 <label>Rooms</label>
                 <select id="rooms" multiple onChange={handleSelect}>

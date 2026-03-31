@@ -10,28 +10,32 @@ const Room = require('../Controller/rooms');
 //Authentication Routes
 router.post('/register', auth.register);
 router.post('/login', auth.login);
+router.post("/logout", auth.logout);
 router.get('/users/:id', auth.getUser);
 router.get('/users', auth.getUsers);
-router.put('/UpdateUser/:id', auth.UpdateUser);
+router.put('/users/:id', auth.UpdateUser);
 router.delete('/users/:id', auth.deleteUser);
 
 //Hotel CRUD Operations
-router.post('/api/addhotel', hotels.addhotel)
-router.put('/api/updatehotel/:id',verifyAdmin, hotels.updatehotel);
-router.delete('/api/hotels/:id'  , hotels.deletehotel)
-router.get('/api/hotels/:id' , hotels.getHotel);
-router.get('/api/hotels' , hotels.getHotels);
-router.get('/api/hotel/CountByCity' , hotels.getHotelByCity);
-router.get('/api/hotels/CountByType' , hotels.getHotelByType);
+router.post('/addhotels', hotels.addhotel); // add hotel
+
+router.get('/allhotels', hotels.getHotels); // get all hotels
+router.get('/hotels/:id', hotels.getHotel); // get single hotel
+
+router.put('/hotels/:id', verifyAdmin, hotels.updatehotel); // update hotel
+router.delete('/hotels/:id', hotels.deletehotel); // delete hotel
+
+router.get('/hotels/countByCity', hotels.getHotelByCity); // count by city
+router.get('/hotels/countByType', hotels.getHotelByType); // count by type
 
 //Rooms ROuter
-router.post('/api/addroom/:id' , Room.CreatRoom)
-router.put('/api/updateroom/:id',verifyAdmin, Room.updateRoom);
-router.put('/api/availability/:id', Room.updateRoomAvail)
-router.delete('/api/deleteroom/:id', verifyAdmin , Room.deleteRoom)
-router.get('/api/getRoom/:id', verifyUser ,Room.getRoom);
-router.get('/api/rooms'  , Room.getRooms)
-router.get('/api/room/:id',Room.getroom)
-router.get('/api/reserved/:id',Room.getReserved)
+router.post('/addroom/:id' , Room.CreatRoom)
+router.put('/updateroom/:id',verifyAdmin, Room.updateRoom);
+router.put('/availability/:id', Room.updateRoomAvail)
+router.delete('/deleteroom/:id', verifyAdmin , Room.deleteRoom)
+router.get('/getRoom/:id', verifyUser ,Room.getRoom);
+router.get('/rooms'  , Room.getRooms)
+router.get('/room/:id',Room.getroom)
+router.get('/reserved/:id',Room.getReserved)
 
 module.exports = router;

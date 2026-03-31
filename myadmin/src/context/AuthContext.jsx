@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
+import PropTypes from "prop-types";
 
 const INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -16,24 +17,28 @@ const AuthReducer = (state, action) => {
         loading: true,
         error: null,
       };
+
     case "LOGIN_SUCCESS":
       return {
         user: action.payload,
         loading: false,
         error: null,
       };
+
     case "LOGIN_FAILURE":
       return {
         user: null,
         loading: false,
         error: action.payload,
       };
+
     case "LOGOUT":
       return {
         user: null,
         loading: false,
         error: null,
       };
+
     default:
       return state;
   }
@@ -58,4 +63,9 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+// ✅ PropTypes Fix
+AuthContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
